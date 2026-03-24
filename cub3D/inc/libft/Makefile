@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+         #
+#    By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/01 16:49:46 by vacuccu           #+#    #+#              #
-#    Updated: 2025/05/05 08:43:52 by vacuccu          ###   ########.fr        #
+#    Updated: 2026/01/21 12:16:27 by anpastac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS = \
 	   ft_printf.c \
 	   ft_pstr.c \
 	   get_next_line.c \
+	   get_next_line_read.c \
 
 	   
        

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 18:34:41 by vacuccu           #+#    #+#             */
-/*   Updated: 2025/05/05 08:47:21 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/01/21 12:13:24 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(const char *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
+char	*get_next_line(int fd);
+char	*ft_read_and_store(int fd, char **rest, char *buffer);
 char	*get_next_line(int fd);
 
 #endif

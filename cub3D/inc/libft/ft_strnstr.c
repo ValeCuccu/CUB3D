@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:52:16 by vacuccu           #+#    #+#             */
-/*   Updated: 2025/01/14 16:55:10 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/20 11:45:24 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {

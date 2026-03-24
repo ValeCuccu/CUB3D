@@ -1,47 +1,72 @@
-# --- COLORI ---
-GREEN	= \033[0;32m
-RED		= \033[0;31m
-YELLOW	= \033[0;33m
-RESET	= \033[0m
+# --- NOME DEL PROGRAMMA ---
+NAME        = cub3D
 
-# --- CONFIGURAZIONE ---
-NAME	= cub3D
-CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -Iinc
-RM		= rm -f
+# --- COLORI (Solo Verde e Rosso) ---
+GREEN       = \033[0;32m
+RED         = \033[0;31m
+RESET       = \033[0m
 
-# --- PATHS ---
-SRC_DIR	= src/
-OBJ_DIR	= obj/
+# --- COMPILATORE E FLAG ---
+CC          = cc
+# Nota: aggiunto -I./inc per dire al compilatore dove trovare i file .h
+CFLAGS      = -Wall -Wextra -Werror -I./inc
 
-# Lista dei file (da aggiornare man mano che create i file .c)
-SRCS	= $(SRC_DIR)main.c \
-		  $(SRC_DIR)raycasting/engine.c \
-		  $(SRC_DIR)parsing/parser.c \
-		  $(SRC_DIR)utils/cleanup.c
+# --- PATHS AGGIORNATI ---
+# Le librerie ora sono dentro inc/
+LIBFT_DIR   = inc/libft/
+MLX_DIR     = inc/minilibx-linux/
 
-OBJS	= $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+# Aggiornati i flag di linking per puntare alle nuove directory
+LDFLAGS     = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+
+# --- SORGENTI AGGIORNATI (Aggiunto il prefisso src/) ---
+# Il main ora è in src/
+SRC_MAIN    = src/main.c
+
+# Parte di Antonio (Parsing)
+SRC_PARSING = src/parsing/line_checks.c \
+              src/parsing/parse_color.c \
+              src/parsing/parse_file.c \
+              src/parsing/parse_map.c \
+              src/parsing/parse_texture.c \
+              src/parsing/utils.c \
+              src/parsing/validation.c
+
+# Parte Tua (Raycasting)
+SRC_RAY     = src/raycasting/init_engine.c \
+              src/raycasting/render.c \
+              src/raycasting/math_utils.c \
+              src/raycasting/utils.c
+
+SRCS        = $(SRC_MAIN) $(SRC_PARSING) $(SRC_RAY)
+OBJS        = $(SRCS:.c=.o)
+
+# --- REGOLE (Nessuna modifica strutturale necessaria qui) ---
+
+$(NAME): $(OBJS)
+	@make -C $(LIBFT_DIR) > /dev/null
+	@make -C $(MLX_DIR) > /dev/null
+	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
+	@echo "$(GREEN)✅ cub3D creato con successo!$(RESET)"
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@ || (echo "$(RED)❌ Errore nella compilazione di $<$(RESET)" && exit 1)
+
+clean:
+	@make clean -C $(LIBFT_DIR) > /dev/null
+	@rm -f $(OBJS)
+	@echo "$(GREEN)🗑️  File oggetto rimossi.$(RESET)"
+
+fclean: clean
+	@make fclean -C $(LIBFT_DIR) > /dev/null
+	@rm -f $(NAME)
+	@echo "$(GREEN)🗑️  Eseguibile cub3D rimosso.$(RESET)"
+
+re: fclean all
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "$(GREEN)✅ Compilation successful: $(NAME) is ready!$(RESET)"
-
-# Compilazione dei singoli file .o con creazione automatica delle cartelle
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@ || (echo "$(RED)❌ Error compiling $<$(RESET)" && exit 1)
-	@echo "$(YELLOW)Compiling: $<...$(RESET)"
-
-clean:
-	@$(RM) -r $(OBJ_DIR)
-	@echo "$(RED)Deleted object files.$(RESET)"
-
-fclean: clean
-	@$(RM) $(NAME)
-	@echo "$(RED)Deleted executable $(NAME).$(RESET)"
-
-re: fclean all
+bonus: all
+	@echo "$(GREEN)✅ Bonus compilati (se presenti).$(RESET)"
 
 .PHONY: all clean fclean re bonus
