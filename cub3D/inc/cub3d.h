@@ -105,7 +105,7 @@ void	validate_map(t_game *game);
 
 /* raycasting */
 void	init_engine(t_game *game);
-int     render_frame(t_game *game);
+int 	render_frame(t_game *game);
 void    my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /* ==================== LIBFT / GNL ==================== */

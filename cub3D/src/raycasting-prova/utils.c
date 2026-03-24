@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 17:59:46 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/23 18:57:05 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/24 11:47:50 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,5 @@ int	close_game(t_game *game)
 		free(game->mlx);
 	printf("Uscita da CUB3D con Successo!\n");
 	exit(0);
-	return (0);
-}
-
-int	key_press(int keycode, t_game *game)
-{
-	if (keycode == 65307)
-		close_game(game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 12:53:00 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/23 18:56:49 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/24 11:09:56 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	init_mlx_image(t_game *game)
 {
-	game->window = mlx_new_window(game->mlx, 1920, 1080, "CUB3D");
+	game->window = mlx_new_window(game->mlx, 1024, 512, "CUB3D");
 	if (!game->window)
 		error_exit("Errore: Impossibile creare la finestra MLX", game);
-	game->ghost_image.img = mlx_new_image(game->mlx, 1920, 1080);
+	game->ghost_image.img = mlx_new_image(game->mlx, 1024, 512);
 	if (!game->ghost_image.img)
 		error_exit("Errore: Impossibile creare l'immagine MLX", game);
 	game->ghost_image.addr = mlx_get_data_addr(game->ghost_image.img,

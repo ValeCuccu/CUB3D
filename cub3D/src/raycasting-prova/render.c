@@ -6,18 +6,18 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 12:53:42 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/23 18:56:35 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/24 11:49:39 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
-#define TILE_SIZE 135
+#define TILE_SIZE 64
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || x >= 1920 || y == 0 || y >= 1080)
+	if (x < 0 || x >= 1024 || y < 0 || y >= 512)
 		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
@@ -64,7 +64,7 @@ void render_minimap(t_game *game)
             if (game->map.grid[i][j] == '1')
                 color = 0xFFFFFF; // Muro: Bianco
             else
-                color = 0x888888; // Spazio vuoto: Grigio scuro
+                color = 0x555555; // Spazio vuoto: Grigio scuro
 
             // Calcoliamo la posizione in pixel moltiplicando per TILE_SIZE
             draw_square(game, j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, color);
@@ -82,7 +82,7 @@ void render_player(t_game *game)
     int py = (int)(game->player.pos.y * TILE_SIZE);
     
     // Lo facciamo grande 6 pixel (centrato)
-    int player_size = 6;
+    int player_size = 10;
     draw_square(game, px - (player_size/2), py - (player_size/2), player_size, 0xFFFF00); // Giallo
     
     // Bonus: Disegniamo anche una piccola linea per mostrare dove sta guardando!
