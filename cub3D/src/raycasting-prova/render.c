@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 12:53:42 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/25 11:59:23 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/25 14:14:34 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ void render_minimap(t_game *game)
 // Disegna il giocatore come un quadratino giallo
 void render_player(t_game *game)
 {
-	double	i;
+	/* double	i */;
 	int		player_size;
 
-	i = 0;
+	//i = 0;
     // Calcoliamo la posizione esatta in pixel
     int px = (int)(game->player.pos.x * TILE_SIZE);
     int py = (int)(game->player.pos.y * TILE_SIZE);

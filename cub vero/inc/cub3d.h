@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/25 13:29:02 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/25 15:56:44 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ typedef struct s_img
 */
 typedef struct s_textures
 {
-	char	*no; // Percorso dell'immagine per i muri esposti a Nord
-	char	*so; // Percorso dell'immagine per i muri esposti a Sud
-	char	*we; // Percorso dell'immagine per i muri esposti a Ovest
-	char	*ea; // Percorso dell'immagine per i muri esposti a Est
+	char	*north; // Percorso dell'immagine per i muri esposti a Nord
+	char	*south; // Percorso dell'immagine per i muri esposti a Sud
+	char	*west; // Percorso dell'immagine per i muri esposti a Ovest
+	char	*east; // Percorso dell'immagine per i muri esposti a Est
 }	t_textures;
 
 /*
@@ -154,20 +154,20 @@ int		close_game(t_game *game);
 int		key_press(int keycode, t_game *game);
 
 /* Validation */
+int		is_valid_map_char(char c);
+void	pad_row(char **row, int width);
+void	check_borders(t_game *game);
 void	validate_map(t_game *game);
-
-/* raycasting */
-void	init_engine(t_game *game);
-int 	render_frame(t_game *game);
-void    my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	draw_ray(t_game *g);
+void	setup_map_dimension(t_game *game);
+void	validate_map(t_game *game);
 
 /* ==================== LIBFT / GNL ==================== */
 char	*get_next_line(int fd);
 
 /* ==================== UTILS ==================== */
 void 	error_exit(char *msg, t_game *game);
-void    free_game(t_game *game);
+void	free_map(t_game *game);
+void	free_textures(t_game *game);
 char	*ft_strdup(const char *s);
 char	*ft_strtrim(const char *s1, const char *set);
 
