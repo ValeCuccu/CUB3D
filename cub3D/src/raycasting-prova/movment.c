@@ -6,11 +6,13 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 11:44:57 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/24 12:07:01 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/25 10:36:12 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
+
+/* qui semplicemente viene gestito il movimento del player coni tasti WASD e il movimento della camera per ora con le frecce direzionali successivamente andra aggiunto anche il controllo da mouse per la camera */
 
 static void	move_forward_back(int keycode, t_game *game)
 {

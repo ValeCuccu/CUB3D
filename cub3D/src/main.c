@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 18:07:32 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/24 13:05:49 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/25 12:25:11 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int main(int argc, char **argv)
     // --- LA TUA MAPPA FINTA ---
     static char *fake_map[] = {
         "11111111",
-        "10000001",
         "10010001",
-        "10000001",
-        "10000001",
-        "10000001",
+        "10010001",
+        "10011101",
+        "10010001",
+        "10010001",
         "10000001",
         "11111111"
     };
@@ -41,9 +41,18 @@ int main(int argc, char **argv)
     game.map.height = 8;
     
     // Posizione iniziale e direzione del player
-    game.player.pos.x = 2;
-    game.player.pos.y = 0.5;
+    game.player.pos.y = 2.5;
+    game.player.pos.x = 2.5;
     game.player.spawn_dir = 'W';
+
+	/* VETTORE DIREZIONE */
+	game.player.dir.x = -1.0;
+	game.player.dir.y = 0.0;
+
+	// 3. VETTORE PIANO / FOV (Perpendicolare alla direzione!)
+    // Se guardi a Ovest (-X), il piano sta sull'asse Y.
+    game.player.plane.x = 0.0;
+    game.player.plane.y = -0.66;
 
     // 1. Inizializza la finestra e l'immagine ghost
     init_engine(&game);

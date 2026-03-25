@@ -1,7 +1,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
-# define MOVE_SPEED 0.15
-# define ROT_SPEED 0.1
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.05
+# define TILE_SIZE 64
 
 /* ==================== LIBRARIES ==================== */
 # include <stdlib.h>
@@ -13,6 +14,24 @@
 # include "minilibx-linux/mlx.h"
 
 /* ==================== STRUCTS ==================== */
+
+/* ==================== RAGGI ====================== */
+typedef struct s_ray
+{
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_y;
+	int		map_x;
+	double	delta_x;
+	double	delta_y;
+	double	side_x;
+	double	side_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+}	t_ray;
+
 
 /* ==================== VETTORI ==================== */
 typedef struct s_vector
@@ -107,6 +126,7 @@ void	validate_map(t_game *game);
 void	init_engine(t_game *game);
 int 	render_frame(t_game *game);
 void    my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	draw_ray(t_game *g);
 
 /* ==================== LIBFT / GNL ==================== */
 char	*get_next_line(int fd);

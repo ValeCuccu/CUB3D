@@ -6,13 +6,13 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 12:53:42 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/24 11:49:39 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/25 11:59:23 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
-#define TILE_SIZE 64
 
+/* qui semplicemente printo cio che ho disegnato sulla finestra */
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
@@ -77,25 +77,32 @@ void render_minimap(t_game *game)
 // Disegna il giocatore come un quadratino giallo
 void render_player(t_game *game)
 {
+	double	i;
+	int		player_size;
+
+	i = 0;
     // Calcoliamo la posizione esatta in pixel
     int px = (int)(game->player.pos.x * TILE_SIZE);
     int py = (int)(game->player.pos.y * TILE_SIZE);
     
     // Lo facciamo grande 6 pixel (centrato)
-    int player_size = 10;
+    player_size = 6;
     draw_square(game, px - (player_size/2), py - (player_size/2), player_size, 0xFFFF00); // Giallo
+	draw_ray(game);
     
     // Bonus: Disegniamo anche una piccola linea per mostrare dove sta guardando!
-    int end_x = px + (int)(game->player.dir.x * 20); // 20 pixel di lunghezza
-    int end_y = py + (int)(game->player.dir.y * 20);
+    /* int end_x = px + (int)(game->player.dir.x * 1000); // 20 pixel di lunghezza
+    int end_y = py + (int)(game->player.dir.y * 1000);
     
     // Un modo super banale per fare una linea (senza usare algoritmi complessi come Bresenham)
     // è campionare dei punti lungo il vettore.
-    for (double i = 0; i <= 1.0; i += 0.05) {
-        int lx = px + (int)((end_x - px) * i);
+	while (i <= 1.0)
+	{
+		int lx = px + (int)((end_x - px) * i);
         int ly = py + (int)((end_y - py) * i);
         my_mlx_pixel_put(&game->ghost_image, lx, ly, 0xFF0000); // Linea Rossa
-    }
+		i += 0.0001;
+	} */
 }
 
 // --- RENDER FRAME ---

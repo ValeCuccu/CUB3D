@@ -6,11 +6,13 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 12:53:00 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/24 11:09:56 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/25 10:34:34 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
+
+/* in questo file inizializzo la finestra con mlx i vettori del giocatore e la direzione di spawn */
 
 static void	init_mlx_image(t_game *game)
 {
