@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:07:17 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/25 15:19:35 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/30 11:23:40 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	process_line(t_game *game, char *line, int *map_started)
 		parse_map(game, line);
 	}
 }
-
+/* Apre il file .cub e legge riga per riga */
 void	parse_file(t_game *game, char *filename)
 {
 	int		fd;

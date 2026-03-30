@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:20:28 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/25 15:24:25 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/30 11:53:35 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*skip_spaces(char *str)
 void	error_exit(char *msg, t_game *game)
 {
 	if (game)
-		free_game(game);
+		free_map(game);
 	write(2, msg, ft_strlen(msg));
 	write(2, "\n", 1);
 	exit(EXIT_FAILURE);

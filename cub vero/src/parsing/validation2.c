@@ -3,48 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   validation2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vacuccu <vacuccu@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 15:40:52 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/25 16:05:35 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/30 17:30:00 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-void	setup_map_dimension(t_game *game)
+/* Controlla che ogni '0' o player non abbia spazi o caratteri invalidi attorno */
+bool	check_map_8neighbors(char **map, int height, int width)
 {
-	int	i;
-	int	len;
+	int y, x;
+	int dy[] = {-1, -1, -1, 0, 0, 1, 1, 1};
+	int dx[] = {-1, 0, 1, -1, 1, -1, 0, 1};
 
-	i = 0;
-	game->map.width = 0;
-	while (i < game->map.height)
+	for (y = 0; y < height; y++)
 	{
-		len = ft_strlen(game->map.grid[i]);
-		if (len > game->map.width)
-			game->map.width = len;
-		i++;
+		for (x = 0; x < width; x++)
+		{
+			char c = map[y][x];
+			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+			{
+				for (int i = 0; i < 8; i++)
+				{
+					int ny = y + dy[i];
+					int nx = x + dx[i];
+					if (ny < 0 || ny >= height || nx < 0 || nx >= (int)ft_strlen(map[ny]))
+						return false;
+					char nc = map[ny][nx];
+					if (nc == ' ')
+						return false;
+				}
+			}
+		}
 	}
-	i = 0;
-	while (i < game->map.height)
-	{
-		pad_row(&game->map.grid[i], game->map.width);
-		i++;
-	}
+	return true;
 }
 
+/* Controlla caratteri validi e conta il player */
 static void	check_chars_and_player(t_game *game, int *p_count)
 {
-	int		i;
-	int		j;
-	char	c;
+	int i, j;
+	char c;
 
-	i = -1;
-	while (++i < game->map.height)
+	i = 0;
+	while (i < game->map.height)
 	{
-		j = -1;
-		while (++j < game->map.width)
+		j = 0;
+		while (j < (int)ft_strlen(game->map.grid[i]))
 		{
 			c = game->map.grid[i][j];
 			if (!is_valid_map_char(c))
@@ -56,30 +64,21 @@ static void	check_chars_and_player(t_game *game, int *p_count)
 				game->player.pos.y = (double)i + 0.5;
 				game->player.spawn_dir = c;
 			}
+			j++;
 		}
+		i++;
 	}
 }
 
+/* Valida la mappa completa */
 void	validate_map(t_game *game)
 {
-	int	p_count;
-	int	i;
-	int	j;
+	int p_count = 0;
 
-	p_count = 0;
-	setup_map_dimension(game);
 	check_chars_and_player(game, &p_count);
 	if (p_count != 1)
 		error_exit("Map must contain exactly one player", game);
-	i = 0;
-	while (++i < game->map.height -1)
-	{
-		j = 0;
-		while (++j < game->map.width -1)
-		{
-			if (game->map.grid[i][j] == ' ')
-				error_exit("Invalid space inside map", game);
-		}
-	}
-	check_borders(game);
+
+	if (!check_map_8neighbors(game->map.grid, game->map.height, 0))
+		error_exit("Map is not closed: '0' or player touches a space", game);
 }

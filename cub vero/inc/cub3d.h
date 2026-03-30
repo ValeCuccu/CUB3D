@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/25 15:56:44 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/03/30 11:52:13 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# include <stdbool.h>
 # include "libft/libft.h"
-# include "minilibx-linux/mlx.h"
+/*# include "minilibx-linux/mlx.h"*/
 
 /* RAGGI */
 /* questa struct contiene tutte le variabilli che servono al dda per calcolare traiettoria e collisione */
@@ -155,11 +156,9 @@ int		key_press(int keycode, t_game *game);
 
 /* Validation */
 int		is_valid_map_char(char c);
-void	pad_row(char **row, int width);
-void	check_borders(t_game *game);
 void	validate_map(t_game *game);
-void	setup_map_dimension(t_game *game);
 void	validate_map(t_game *game);
+bool	check_map_8neighbors(char **map, int height, int width);
 
 /* ==================== LIBFT / GNL ==================== */
 char	*get_next_line(int fd);
