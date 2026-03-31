@@ -6,7 +6,7 @@
 /*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/30 11:52:13 by anpastac         ###   ########.fr       */
+/*   Updated: 2026/03/31 12:27:57 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,8 @@ int		key_press(int keycode, t_game *game);
 int		is_valid_map_char(char c);
 void	validate_map(t_game *game);
 void	validate_map(t_game *game);
-bool	check_map_8neighbors(char **map, int height, int width);
+bool    check_map_8neighbors(t_game *game);
+int     is_player(char c);
 
 /* ==================== LIBFT / GNL ==================== */
 char	*get_next_line(int fd);

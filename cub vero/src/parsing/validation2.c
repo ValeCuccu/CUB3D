@@ -12,73 +12,85 @@
 
 #include "../../inc/cub3d.h"
 
-/* Controlla che ogni '0' o player non abbia spazi o caratteri invalidi attorno */
-bool	check_map_8neighbors(char **map, int height, int width)
+/* Controlla se un carattere rappresenta un player */
+static int is_player(char c)
 {
-	int y, x;
-	int dy[] = {-1, -1, -1, 0, 0, 1, 1, 1};
-	int dx[] = {-1, 0, 1, -1, 1, -1, 0, 1};
-
-	for (y = 0; y < height; y++)
-	{
-		for (x = 0; x < width; x++)
-		{
-			char c = map[y][x];
-			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
-			{
-				for (int i = 0; i < 8; i++)
-				{
-					int ny = y + dy[i];
-					int nx = x + dx[i];
-					if (ny < 0 || ny >= height || nx < 0 || nx >= (int)ft_strlen(map[ny]))
-						return false;
-					char nc = map[ny][nx];
-					if (nc == ' ')
-						return false;
-				}
-			}
-		}
-	}
-	return true;
+    if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+        return 1;
+    return 0;
 }
 
-/* Controlla caratteri validi e conta il player */
-static void	check_chars_and_player(t_game *game, int *p_count)
+/* Controlla che ogni '0' o player non abbia attorno spazi o caratteri invalidi */
+bool check_map_8neighbors(t_game *game)
 {
-	int i, j;
-	char c;
-
-	i = 0;
-	while (i < game->map.height)
-	{
-		j = 0;
-		while (j < (int)ft_strlen(game->map.grid[i]))
-		{
-			c = game->map.grid[i][j];
-			if (!is_valid_map_char(c))
-				error_exit("Invalid map character", game);
-			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-			{
-				(*p_count)++;
-				game->player.pos.x = (double)j + 0.5;
-				game->player.pos.y = (double)i + 0.5;
-				game->player.spawn_dir = c;
-			}
-			j++;
-		}
-		i++;
-	}
+    int y = 0;
+    while (y < game->map.height)
+    {
+        int x = 0;
+        while (x < (int)ft_strlen(game->map.grid[y]))
+        {
+            char c = game->map.grid[y][x];
+            if (c == '0' || is_player(c))
+            {
+                int dy = -1;
+                while (dy <= 1)
+                {
+                    int dx = -1;
+                    while (dx <= 1)
+                    {
+                        if (dy != 0 || dx != 0) // escludi la cella centrale
+                        {
+                            int ny = y + dy;
+                            int nx = x + dx;
+                            if (ny < 0 || ny >= game->map.height)
+                                return false;
+                            if (nx < 0 || nx >= (int)ft_strlen(game->map.grid[ny]))
+                                return false;
+                            char nc = game->map.grid[ny][nx];
+                            if (nc != '0' && nc != '1' && !is_player(nc))
+                                return false;
+                        }
+                        dx++;
+                    }
+                    dy++;
+                }
+            }
+            x++;
+        }
+        y++;
+    }
+    return true;
 }
 
 /* Valida la mappa completa */
-void	validate_map(t_game *game)
+void validate_map(t_game *game)
 {
-	int p_count = 0;
+    int y = 0;
+    int player_count = 0;
 
-	check_chars_and_player(game, &p_count);
-	if (p_count != 1)
-		error_exit("Map must contain exactly one player", game);
+    while (y < game->map.height)
+    {
+        int x = 0;
+        while (x < (int)ft_strlen(game->map.grid[y]))
+        {
+            char c = game->map.grid[y][x];
+            if (c != '0' && c != '1' && !is_player(c))
+                error_exit("Invalid map character", game);
+            if (is_player(c))
+            {
+                player_count++;
+                game->player.pos.x = (double)x + 0.5;
+                game->player.pos.y = (double)y + 0.5;
+                game->player.spawn_dir = c;
+            }
+            x++;
+        }
+        y++;
+    }
 
-	if (!check_map_8neighbors(game->map.grid, game->map.height, 0))
-		error_exit("Map is not closed: '0' or player touches a space", game);
+    if (player_count != 1)
+        error_exit("Map must contain exactly one player", game);
+
+    if (!check_map_8neighbors(game))
+        error_exit("Map is not closed: '0' or player touches invalid cell", game);
 }
