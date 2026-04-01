@@ -6,29 +6,11 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:21:10 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/01 13:13:27 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/01 17:12:40 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-int	render_frame(t_game *game)
-{
-	int			x;
-	double		camerax;
-	t_vector	ray_dir;
-
-	x = 0;
-	while (x < 1920)
-	{
-		camerax = 2 * x / (double)1920 - 1;
-		ray_dir.x = game->player.dir.x + game->player.plane.x * camerax;
-		ray_dir.y = game->player.dir.y + game->player.plane.y * camerax;
-		x++;
-	}
-	mlx_put_image_to_window(game->mlx, game->window, game->ghost_image.img, 0, 0);
-	return (0);
-}
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
@@ -36,36 +18,42 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 	if (x < 0 || x >= 1920 || y < 0 || y >= 1080)
 		return ;
+	/* Calcolo dell'indirizzo di memoria del pixel (x, y)
+	   questo permette al pc di interpretare anche */
 	dest = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int*)dest = color;
+	// Scrittura del colore (Cast a unsigned int perché il colore è un int a 32 bit)
+	*(unsigned int *)dest = color;
 }
 
-void	draw_minimap(t_game *game)
+static void clear_image(t_game *game)
 {
-	int	x;
-	int	y;
-	int	color;
-	int	i;
-	int	j;
+    int x;
+    int y;
 
-	y = 0;
-	while (y < game->map.height)
-	{
-		x = 0;
-		while (x < game->map.width)
-		{
-			//bianco per i muri
-			if (game->map.grid[y][x] == '1')
-				color = 0xFFFFFF;
-			else
-				color = 0x555555; //grigio per il resto
-			i = 0;
-			while (i < TILE_SIZE)
-			{
-				j = 0;
-				while (j < TILE_SIZE)
-					my_mlx_pixel_put(&game->ghost_image, x * TILE_SIZE, game->player.pos.y * TILE_SIZE, 0xFFFF00); //giocatore giallo
-			}
-		}
-	}
+    y = 0;
+    while (y < 1080)
+    {
+        x = 0;
+        while (x < 1920)
+        {
+            my_mlx_pixel_put(&game->ghost_image, x, y, 0x000000);
+            x++;
+        }
+        y++;
+    }
+}
+
+int render_frame(t_game *game)
+{
+    // 1. Puliamo il frame precedente
+    clear_image(game);
+
+    // 2. Disegniamo la base 2D (Fase 1)
+    draw_minimap(game);
+    draw_player_2d(game);
+
+    // 3. Spingiamo tutto sulla finestra
+    mlx_put_image_to_window(game->mlx, game->window, game->ghost_image.img, 0, 0);
+    
+    return (0);
 }

@@ -32,14 +32,16 @@ SRC_PARSING = src/parsing/line_checks.c \
               src/parsing/utils.c \
               src/parsing/validation.c \
 			  src/parsing/validation2.c \
-			  src/raycasting/key_utils.c
+			  src/raycasting/key_utils.c \
+			  src/raycasting/minimap_utils.c
 
 SRC_MAIN	= src/main_test.c
 
 # Parte Tua (Raycasting)
 SRC_RAY     = src/raycasting/init_engine.c \
 			  src/raycasting/render.c \
-			  src/raycasting/graphics_utils.c
+			  src/raycasting/general_utils.c \
+
 
 SRCS        = $(SRC_MAIN) $(SRC_PARSING) $(SRC_RAY)
 OBJS        = $(SRCS:.c=.o)

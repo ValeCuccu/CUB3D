@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 15:59:51 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/01 12:20:29 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/01 15:44:44 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,22 @@ static void	set_player_vectors(t_game *game)
 	if (game->player.spawn_dir == 'N')
 	{
 		game->player.dir.y = -1;
-		game->player.plane.x = 0.70;
+		game->player.plane.x = 0.66;
 	}
 	else if (game->player.spawn_dir == 'S')
 	{
 		game->player.dir.y = 1;
-		game->player.plane.x = -0.70;
+		game->player.plane.x = -0.66;
 	}
 	else if (game->player.spawn_dir == 'E')
 	{
 		game->player.dir.x = 1;
-		game->player.plane.x = -0.70;
+		game->player.plane.y = -0.66;
 	}
 	else if (game->player.spawn_dir == 'W')
 	{
 		game->player.dir.x = -1;
-		game->player.plane.x = -0.70;
+		game->player.plane.y = -0.66;
 	}
 }
 

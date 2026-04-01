@@ -6,16 +6,23 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/01 13:13:16 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/01 17:19:44 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# define MOVE_SPEED 0.05
+
+# define MOVE_SPEED 0.9
 # define ROT_SPEED 0.05
 # define TILE_SIZE 64
 # define ESC 65307
+# define W 119
+# define S 115
+# define A 97
+# define D 100
+# define LEFT 65361
+# define RIGHT 65363
 
 /* DIPENDENZE */
 # include <stdlib.h>
@@ -164,12 +171,18 @@ bool    check_map_8neighbors(t_game *game);
 /* ==================== GRAPHICS ==================== */
 void	init_engine(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	draw_minimap(t_game *game);
 int		close_game(t_game *game);
 int		handle_keypress(int key, t_game *game);
-int		render_frame(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+
+/* ==================== MINIMAP ==================== */
+void	draw_square(t_game *game, t_vector pos, int size, int color);
 void	draw_minimap(t_game *game);
+void	draw_player_2d(t_game *game);
+void	apply_movement(t_game *game, double move_x, double move_y);
+int		handle_keypress(int key, t_game *game);
+void	rotate_player(t_game *game, double rot_dir);
+int 	render_frame(t_game *game);
 
 /* ==================== LIBFT / GNL ==================== */
 char	*get_next_line(int fd);
