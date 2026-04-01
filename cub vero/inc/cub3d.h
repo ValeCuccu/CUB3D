@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/31 12:27:57 by anpastac         ###   ########.fr       */
+/*   Updated: 2026/04/01 13:13:16 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.05
 # define TILE_SIZE 64
+# define ESC 65307
 
 /* DIPENDENZE */
 # include <stdlib.h>
@@ -24,6 +25,7 @@
 # include <math.h>
 # include <stdbool.h>
 # include "libft/libft.h"
+# include "minilibx-linux/mlx.h"
 /*# include "minilibx-linux/mlx.h"*/
 
 /* RAGGI */
@@ -157,9 +159,17 @@ int		key_press(int keycode, t_game *game);
 /* Validation */
 int		is_valid_map_char(char c);
 void	validate_map(t_game *game);
-void	validate_map(t_game *game);
 bool    check_map_8neighbors(t_game *game);
-int     is_player(char c);
+
+/* ==================== GRAPHICS ==================== */
+void	init_engine(t_game *game);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	draw_minimap(t_game *game);
+int		close_game(t_game *game);
+int		handle_keypress(int key, t_game *game);
+int		render_frame(t_game *game);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	draw_minimap(t_game *game);
 
 /* ==================== LIBFT / GNL ==================== */
 char	*get_next_line(int fd);

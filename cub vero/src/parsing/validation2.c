@@ -63,7 +63,7 @@ bool check_map_8neighbors(t_game *game)
 }
 
 /* Valida la mappa completa */
-void validate_map(t_game *game)
+void	validate_map(t_game *game)
 {
     int y = 0;
     int player_count = 0;

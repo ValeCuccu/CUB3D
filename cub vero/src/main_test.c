@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:24:06 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/25 13:27:58 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/01 13:12:22 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../inc/cub3d.h"
-#include <stdio.h>
-#include <string.h>
 
 int main(int argc, char **argv)
 {
@@ -28,20 +27,24 @@ int main(int argc, char **argv)
 
     // Parsing del file
     parse_file(&game, argv[1]);
-
     // Se arriviamo qui, il parsing è OK
-    printf("Parsing completato con successo!\n\n");
+    //printf("Parsing completato con successo!\n\n");
+	init_engine(&game);
+	// --- AGGIUNGI SOLO QUESTE RIGHE ---
+    
+    // Gestisce il click sulla X della finestra
+    mlx_hook(game.window, 17, 0, close_game, &game);
+    
+    // Gestisce la pressione dei tasti (ESC)
+    mlx_hook(game.window, 2, 1L<<0, handle_keypress, &game);
+	
+	/* qui chiamo il motore vero e proprio che renderizza tutto ad ogni frame */
+	mlx_loop_hook(game.mlx, render_frame, &game);
 
-    printf("Map (%d righe):\n", game.map.height);
-    for (int i = 0; i < game.map.height; i++)
-        printf("%s\n", game.map.grid[i]);
-
-    printf("\nPlayer: (%.1f, %.1f), spawn_dir: %c\n",
-           game.player.pos.x, game.player.pos.y, game.player.spawn_dir);
-
-    // Libera la memoria usata
-    free_map(&game);
-    free_textures(&game);
+    printf("Finestra creata. Premi ESC o la X per chiudere.\n");
+    
+    // Avvia il loop (senza questo la finestra non risponde)
+    mlx_loop(game.mlx);
 
     return 0;
 }
