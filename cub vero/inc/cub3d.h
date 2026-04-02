@@ -6,15 +6,15 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/01 17:19:44 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/02 17:31:18 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define MOVE_SPEED 0.9
-# define ROT_SPEED 0.05
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.01
 # define TILE_SIZE 64
 # define ESC 65307
 # define W 119
@@ -23,6 +23,8 @@
 # define D 100
 # define LEFT 65361
 # define RIGHT 65363
+# define MMAP_SCALE 10
+# define MMAP_OFFSET 20
 
 /* DIPENDENZE */
 # include <stdlib.h>
@@ -51,6 +53,7 @@ typedef struct s_ray
 	int		step_y;    // Direzione in cui il raggio salta sulla griglia Y (-1 per nord, +1 per sud)
 	int		hit;       // Flag di collisione: 0 = il raggio sta viaggiando, 1 = il raggio ha colpito un muro ('1')
 	int		side;      // Indica quale lato del muro è stato colpito: 0 = lato Est/Ovest (X), 1 = lato Nord/Sud (Y)
+	double	perp_wall_dist; // La distanza proiettata perpendicolarmente
 }	t_ray;
 
 /* ==================== VETTORI ==================== */
@@ -179,10 +182,17 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_square(t_game *game, t_vector pos, int size, int color);
 void	draw_minimap(t_game *game);
 void	draw_player_2d(t_game *game);
+void	test_ray_2d(t_game *game, int x);
+void	draw_ray_line_2d(t_game *game, t_ray *ray);
+
 void	apply_movement(t_game *game, double move_x, double move_y);
 int		handle_keypress(int key, t_game *game);
 void	rotate_player(t_game *game, double rot_dir);
 int 	render_frame(t_game *game);
+void	init_ray(t_game *game, t_ray *ray, int x);
+void	set_step_and_side_dist(t_game *game, t_ray *ray);
+void	perform_dda(t_game *game, t_ray *ray);
+void	draw_wall_column(t_game *game, t_ray *ray, int x);
 
 /* ==================== LIBFT / GNL ==================== */
 char	*get_next_line(int fd);

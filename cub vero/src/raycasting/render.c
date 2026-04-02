@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:21:10 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/01 17:12:40 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/02 17:45:33 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,44 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	/* Calcolo dell'indirizzo di memoria del pixel (x, y)
 	   questo permette al pc di interpretare anche */
 	dest = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	// Scrittura del colore (Cast a unsigned int perché il colore è un int a 32 bit)
+	// Scrittura del colore  
+	// (Cast a unsigned int perché il colore è un int a 32 bit)
 	*(unsigned int *)dest = color;
 }
 
-static void clear_image(t_game *game)
+static void	clear_image(t_game *game)
 {
-    int x;
-    int y;
+	int	x;
+	int	y;
 
-    y = 0;
-    while (y < 1080)
-    {
-        x = 0;
-        while (x < 1920)
-        {
-            my_mlx_pixel_put(&game->ghost_image, x, y, 0x000000);
-            x++;
-        }
-        y++;
-    }
+	y = 0;
+	while (y < 1080)
+	{
+		x = 0;
+		while (x < 1920)
+		{
+			my_mlx_pixel_put(&game->ghost_image, x, y, 0x000000);
+			x++;
+		}
+		y++;
+	}
 }
 
-int render_frame(t_game *game)
+int	render_frame(t_game *game)
 {
-    // 1. Puliamo il frame precedente
-    clear_image(game);
+	int		x;
 
-    // 2. Disegniamo la base 2D (Fase 1)
-    draw_minimap(game);
-    draw_player_2d(game);
-
-    // 3. Spingiamo tutto sulla finestra
-    mlx_put_image_to_window(game->mlx, game->window, game->ghost_image.img, 0, 0);
-    
-    return (0);
+	// 1. Puliamo il frame precedente
+	clear_image(game);
+	draw_minimap(game);
+	draw_player_2d(game);
+	x = 0;
+	while (x < 60)
+	{
+		test_ray_2d(game, x); // Printa i raggi
+		x++;
+	}
+	mlx_put_image_to_window(game->mlx, game->window,
+		game->ghost_image.img, 0, 0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:55:21 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/01 17:08:49 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/02 15:22:48 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,9 @@ void	apply_movement(t_game *game, double move_x, double move_y)
 	// Calcoliamo dove vorrebbe andare il player
 	new_x = game->player.pos.x + move_x * MOVE_SPEED;
 	new_y = game->player.pos.y + move_y * MOVE_SPEED;
-
 	// 1. Controllo collisione asse X
 	if (game->map.grid[(int)game->player.pos.y][(int)new_x] != '1')
 		game->player.pos.x = new_x;
-
 	// 2. Controllo collisione asse Y
 	if (game->map.grid[(int)new_y][(int)game->player.pos.x] != '1')
 		game->player.pos.y = new_y;

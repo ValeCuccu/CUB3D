@@ -31,9 +31,7 @@ SRC_PARSING = src/parsing/line_checks.c \
               src/parsing/parse_texture.c \
               src/parsing/utils.c \
               src/parsing/validation.c \
-			  src/parsing/validation2.c \
-			  src/raycasting/key_utils.c \
-			  src/raycasting/minimap_utils.c
+			  src/parsing/validation2.c
 
 SRC_MAIN	= src/main_test.c
 
@@ -41,6 +39,10 @@ SRC_MAIN	= src/main_test.c
 SRC_RAY     = src/raycasting/init_engine.c \
 			  src/raycasting/render.c \
 			  src/raycasting/general_utils.c \
+			  src/raycasting/dda.c \
+			  src/raycasting/key_utils.c \
+			  src/raycasting/minimap_utils.c \
+			  src/raycasting/raycasting.c
 
 
 SRCS        = $(SRC_MAIN) $(SRC_PARSING) $(SRC_RAY)
