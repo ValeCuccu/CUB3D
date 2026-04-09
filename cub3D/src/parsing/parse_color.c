@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:02:33 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/09 19:03:58 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/09 19:12:23 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	parse_color(t_game *game, char *line)
 	{
 		if (game->ceiling_set)
 			error_exit("Duplicate ceiling color", game);
-		parse_color_value(trimmed + 2, &game->map.ceiling_color);
+		parse_color_value(trimmed + 2, &game->ceiling);
 		game->map.ceiling_color = rgb_to_int(game->ceiling); // 🔥 QUI
 		game->ceiling_set = 1;
 	}
