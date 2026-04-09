@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:42:53 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/01 16:58:28 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/09 19:35:37 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	close_game(t_game *game)
 {
+	free_textures(game);
+	free_map(game);
 	if (game->ghost_image.img)
 		mlx_destroy_image(game->mlx, game->ghost_image.img);
 	if (game->window)
