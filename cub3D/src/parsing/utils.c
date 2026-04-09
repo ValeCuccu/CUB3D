@@ -1,30 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/25 13:20:28 by vacuccu           #+#    #+#             */
+/*   Updated: 2026/04/09 18:37:04 by vacuccu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3d.h"
 
 /* Rimuove gli spazi iniziali e tab da una stringa */
-char *skip_spaces(char *str)
+char	*skip_spaces(char *str)
 {
-    while (*str == ' ' || *str == '\t')
-        str++;
-    return str;
+	while (*str == ' ' || *str == '\t')
+		str++;
+	return (str);
 }
 
 /* Stampa un messaggio di errore, libera la memoria e termina il programma */
-void error_exit(char *msg, t_game *game)
+void	error_exit(char *msg, t_game *game)
 {
-    if (game)
-        free_game(game);
-
-    write(2, msg, ft_strlen(msg));
-    write(2, "\n", 1);
-    exit(EXIT_FAILURE);
+	if (game)
+		free_map(game);
+	write(2, msg, ft_strlen(msg));
+	write(2, "\n", 1);
+	exit(EXIT_FAILURE);
 }
 
 /* Libera tutte le strutture allocate di t_game */
-void	free_game(t_game *game)
+void	free_map(t_game *game)
 {
-	int i;
+	int	i;
 
-	/* Libera la mappa */
 	if (game->map.grid)
 	{
 		i = 0;
@@ -38,23 +48,28 @@ void	free_game(t_game *game)
 		game->map.height = 0;
 		game->map.width = 0;
 	}
+}
 
-	/* Libera le textures se allocate */
-	if (game->textures.no)
-		free(game->textures.no);
-	if (game->textures.so)
-		free(game->textures.so);
-	if (game->textures.we)
-		free(game->textures.we);
-	if (game->textures.ea)
-		free(game->textures.ea);
-
-	game->textures.no = NULL;
-	game->textures.so = NULL;
-	game->textures.we = NULL;
-	game->textures.ea = NULL;
-
+void	free_textures(t_game *game)
+{
+	if (game->textures.north)
+		free(game->textures.north);
+	if (game->textures.south)
+		free(game->textures.south);
+	if (game->textures.west)
+		free(game->textures.west);
+	if (game->textures.east)
+		free(game->textures.east);
+	game->textures.north = NULL;
+	game->textures.south = NULL;
+	game->textures.west = NULL;
+	game->textures.east = NULL;
 	/* In futuro, se ci fossero colori dinamici allocati, li si libererebbe qui */
 	// free(game->floor);
 	// free(game->ceiling);
+}
+
+int	rgb_to_int(t_color c)
+{
+	return (c.r << 16 | c.g << 8 | c.b);
 }
