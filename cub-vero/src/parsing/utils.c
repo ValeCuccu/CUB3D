@@ -6,7 +6,7 @@
 /*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:20:28 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/30 11:53:35 by anpastac         ###   ########.fr       */
+/*   Updated: 2026/04/09 13:33:25 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,9 @@ void	free_textures(t_game *game)
 	/* In futuro, se ci fossero colori dinamici allocati, li si libererebbe qui */
 	// free(game->floor);
 	// free(game->ceiling);
+}
+
+int	rgb_to_int(t_color c)
+{
+	return (c.r << 16 | c.g << 8 | c.b);
 }

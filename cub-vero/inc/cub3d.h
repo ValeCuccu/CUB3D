@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/02 17:31:18 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/09 13:31:48 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ typedef struct s_game
 	t_textures	textures;     // Struct annidata contenente i percorsi stringa delle 4 texture
 	t_color		floor;        // Struct annidata contenente i valori RGB del pavimento
 	t_color		ceiling;      // Struct annidata contenente i valori RGB del soffitto
+	int			floor_color;
+	int			ceiling_color;
 	int			floor_set;    // Flag (0/1) per sapere se il colore del pavimento è già stato letto e salvato correttamente
 	int			ceiling_set;  // Flag (0/1) per sapere se il colore del soffitto è già stato letto e salvato correttamente
 	t_map		map;          // Struct annidata contenente la griglia della mappa e le sue dimensioni
@@ -157,6 +159,7 @@ int		is_color_line(char *line);
 /* Parsing elements */
 void	parse_textures(t_game *game, char *line);
 void	parse_color(t_game *game, char *line);
+int		rgb_to_int(t_color c);
 void	parse_rgb(char *str, t_color *color);
 void	parse_map(t_game *game, char *line);
 char	**resize_map(char **old, int new_size);
@@ -176,7 +179,6 @@ void	init_engine(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		close_game(t_game *game);
 int		handle_keypress(int key, t_game *game);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /* ==================== MINIMAP ==================== */
 void	draw_square(t_game *game, t_vector pos, int size, int color);

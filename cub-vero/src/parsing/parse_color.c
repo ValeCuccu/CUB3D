@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:02:33 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/03/25 13:06:44 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/09 13:29:48 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	parse_color(t_game *game, char *line)
 		if (game->floor_set)
 			error_exit("Duplicate floor color", game);
 		parse_color_value(trimmed + 2, &game->floor);
+		game->floor_color = rgb_to_int(game->floor); // 🔥 QUI
 		game->floor_set = 1;
 	}
 	else if (!ft_strncmp(trimmed, "C ", 2))
@@ -68,6 +69,7 @@ void	parse_color(t_game *game, char *line)
 		if (game->ceiling_set)
 			error_exit("Duplicate ceiling color", game);
 		parse_color_value(trimmed + 2, &game->ceiling);
+		game->ceiling_color = rgb_to_int(game->ceiling); // 🔥 QUI
 		game->ceiling_set = 1;
 	}
 	else
