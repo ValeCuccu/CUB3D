@@ -1,0 +1,11 @@
+# Compilazione
+*.o
+*.a
+*.out
+cub3D
+
+# Librerie
+lib/minilibx-linux/
+
+# OS specific
+.DS_Store

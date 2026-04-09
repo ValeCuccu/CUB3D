@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:29:11 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/02 17:09:23 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/09 14:56:47 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_ray(t_game *game, t_ray *ray, int x)
 		ray->delta_x = 1e30;
 		// Questo raggio non incontrerà mai linee X, quindi distanza infinita
 	else
-		ray->delta_x = fabs(1 / ray->ray_dir_y);
+		ray->delta_x = fabs(1 / ray->ray_dir_x);
 	ray->hit = 0;
 }
 

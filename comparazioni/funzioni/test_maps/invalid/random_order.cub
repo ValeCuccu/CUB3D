@@ -1,0 +1,10 @@
+F 220,100,0
+NO ./xpm/noerror_exit(char *msg, t_game *game)th.xpm
+C 0,0,0
+EA ./xpm/east.xpm
+SO ./xpm/south.xpm
+WE ./xpm/west.xpm
+
+111
+1N1
+111
