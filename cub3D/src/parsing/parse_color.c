@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:02:33 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/09 19:12:23 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/09 19:23:26 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	parse_color(t_game *game, char *line)
 {
 	char	*trimmed;
 
-	game->map.floor_color = 0;
-	game->map.ceiling_color = 0;
 	trimmed = skip_spaces(line);
 	if (!ft_strncmp(trimmed, "F ", 2))
 	{
