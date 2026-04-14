@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_engine.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 15:59:51 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/02 15:23:32 by vacuccu          ###   ########.fr       */
-/*                                                                            */
+/* */
+/* :::      ::::::::   */
+/* init_engine.c                                      :+:      :+:    :+:   */
+/* +:+ +:+         +:+     */
+/* By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/* +#+#+#+#+#+   +#+           */
+/* Created: 2026/03/25 15:59:51 by vacuccu           #+#    #+#             */
+/* Updated: 2026/04/14 13:10:00 by vacuccu          ###   ########.fr       */
+/* */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
@@ -56,12 +56,43 @@ static void	set_player_vectors(t_game *game)
 	}
 }
 
-/* INIZIALIZZAZIONE VERA E PROPRIA DELLA FINESTRA USANDO LE FUNZIONI SOPRASTANTI PER INCORPORARE I VALORI NECESSARI */
+static void	load_single_texture(t_game *game, t_img *tex, char *path)
+{
+	tex->img = mlx_xpm_file_to_image(game->mlx, path,
+			&tex->width, &tex->height);
+	if (!tex->img)
+		error_exit("Errore: Impossibile caricare la texture XPM", game);
+	tex->addr = mlx_get_data_addr(tex->img, &tex->bits_per_pixel,
+			&tex->line_length, &tex->endian);
+}
+
+static void	load_textures(t_game *game)
+{
+	load_single_texture(game, &game->textures.n_tex, game->textures.north);
+	load_single_texture(game, &game->textures.s_tex, game->textures.south);
+	load_single_texture(game, &game->textures.w_tex, game->textures.west);
+	load_single_texture(game, &game->textures.e_tex, game->textures.east);
+}
+
+/* INIZIALIZZAZIONE VERA E PROPRIA DELLA FINESTRA */
 void	init_engine(t_game *game)
 {
+	// 1. Inizializza la MLX
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		error_exit("Error: failed inizialization for MLX\n", game);
+		error_exit("MLX init failed", game);
+		
+	// 2. Carica le 4 texture usando la funzione di supporto
+	load_textures(game); 
+	
+	// 3. Crea la finestra e l'immagine usando la funzione di supporto
 	init_mlx_image(game);
+	
+	// 4. Imposta la direzione in cui guarda il giocatore all'avvio
 	set_player_vectors(game);
+
+	// Eventuali Hooks (se li agganci altrove nel codice, lasciali lì, 
+	// altrimenti scommentali e agganciali qui)
+	// mlx_hook(game->window, 17, 0, close_game, game);
+	// mlx_hook(game->window, 2, 1L<<0, handle_keypress, game);
 }

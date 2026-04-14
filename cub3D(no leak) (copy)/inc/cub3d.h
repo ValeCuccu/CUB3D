@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/14 10:53:25 by anpastac         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:49:43 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define MOVE_SPEED 0.03
-# define ROT_SPEED 0.003
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.00000003
 # define TILE_SIZE 64
 # define ESC 65307
 # define W 119
@@ -65,6 +65,8 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_textures
@@ -73,6 +75,10 @@ typedef struct s_textures
 	char	*south;
 	char	*west;
 	char	*east;
+	t_img	n_tex;
+	t_img	s_tex;
+	t_img	w_tex;
+	t_img	e_tex;
 }	t_textures;
 
 typedef struct s_color
@@ -119,6 +125,7 @@ typedef struct s_game
 	t_player	player;
 	char        *current_line; // FIX: Per tracciare la riga corrente e liberarla
     int         fd;            // FIX: Per chiudere il file in caso di errore
+	int			keys[65365];
 }	t_game;
 
 void	parse_file(t_game *game, char *filename);
@@ -178,5 +185,8 @@ void	free_map(t_game *game);
 void	free_textures(t_game *game);
 char	*ft_strdup(const char *s);
 char	*ft_strtrim(const char *s1, const char *set);
+
+int 	key_press(int key, t_game *g);
+int 	key_release(int key, t_game *g);
 
 #endif

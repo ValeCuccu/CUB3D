@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:55:21 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/02 15:22:48 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/14 13:53:12 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,19 @@ void	apply_movement(t_game *game, double move_x, double move_y)
 		game->player.pos.y = new_y;
 }
 
-void	rotate_player(t_game *game, double rot_dir)
+void rotate_player(t_game *game, double rot)
 {
-	double	old_dir_x;
-	double	old_plane_x;
-	double	cos_r;
-	double	sin_r;
+    double old_dir_x;
+    double old_plane_x;
 
-	cos_r = cos(rot_dir * ROT_SPEED);
-	sin_r = sin(rot_dir * ROT_SPEED);
-	// 1. Ruotiamo il vettore Direzione
-	old_dir_x = game->player.dir.x;
-	game->player.dir.x = game->player.dir.x * cos_r - game->player.dir.y * sin_r;
-	game->player.dir.y = old_dir_x * sin_r + game->player.dir.y * cos_r;
-	// 2. Ruotiamo il vettore Piano (FOV)
-	old_plane_x = game->player.plane.x;
-	game->player.plane.x = game->player.plane.x * cos_r - game->player.plane.y * sin_r;
-	game->player.plane.y = old_plane_x * sin_r + game->player.plane.y * cos_r;
+    // 1. Salva la vecchia X della direzione
+    old_dir_x = game->player.dir.x;
+    // 2. Ruota la direzione usando VECCHIA X per calcolare la Y
+    game->player.dir.x = game->player.dir.x * cos(rot) - game->player.dir.y * sin(rot);
+    game->player.dir.y = old_dir_x * sin(rot) + game->player.dir.y * cos(rot);
+
+    // 3. Ripeti la stessa identica cosa per il piano della telecamera (FOV)
+    old_plane_x = game->player.plane.x;
+    game->player.plane.x = game->player.plane.x * cos(rot) - game->player.plane.y * sin(rot);
+    game->player.plane.y = old_plane_x * sin(rot) + game->player.plane.y * cos(rot);
 }

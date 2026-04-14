@@ -1,4 +1,4 @@
-NO ./xpm/noerror_exit(char *msg, t_game *game)th.xpm
+NO ./xpm/north.xpm
 SO ./xpm/south.xpm
 WE ./xpm/west.xpm
 EA ./xpm/east.xpm

@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:42:53 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/09 19:35:37 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/14 13:38:29 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 int	close_game(t_game *game)
 {
+	if (game->textures.n_tex.img)
+		mlx_destroy_image(game->mlx, game->textures.n_tex.img);
+	if (game->textures.s_tex.img)
+		mlx_destroy_image(game->mlx, game->textures.s_tex.img);
+	if (game->textures.w_tex.img)
+		mlx_destroy_image(game->mlx, game->textures.w_tex.img);
+	if (game->textures.e_tex.img)
+		mlx_destroy_image(game->mlx, game->textures.e_tex.img);
 	free_textures(game);
 	free_map(game);
 	if (game->ghost_image.img)
@@ -28,4 +36,16 @@ int	close_game(t_game *game)
 	printf("Chiusura pulita eseguita\n");
 	exit(0);
 	return (0);
+}
+
+int key_press(int key, t_game *g)
+{
+    g->keys[key] = 1;
+    return (0);
+}
+
+int key_release(int key, t_game *g)
+{
+    g->keys[key] = 0;
+    return (0);
 }
