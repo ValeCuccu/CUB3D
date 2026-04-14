@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 15:27:18 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/13 18:16:54 by anpastac         ###   ########.fr       */
+/*   Created: 2026/03/25 12:57:27 by anpastac          #+#    #+#             */
+/*   Updated: 2026/04/14 11:58:48 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	scan_map(t_game *game)
 		while (x < (int)ft_strlen(game->map.grid[y]))
 		{
 			c = game->map.grid[y][x];
-			if (!is_valid_map_char(c)) // FIX: Ora accetta 0, 1, N, S, E, W e lo Spazio!
-   				error_exit("Invalid map character", game);
+			if (!is_valid_map_char(c))
+				error_exit("Invalid map character", game);
 			p.x = x;
 			p.y = y;
 			handle_player(game, p, c, &player_count);
