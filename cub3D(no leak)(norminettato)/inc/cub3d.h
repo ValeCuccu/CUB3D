@@ -6,15 +6,15 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/14 14:47:48 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/14 15:22:17 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define MOVE_SPEED 0.1
-# define ROT_SPEED 0.00000003
+# define MOVE_SPEED 1.0
+# define ROT_SPEED 0.01
 # define TILE_SIZE 64
 # define ESC 65307
 # define W 119
@@ -129,7 +129,6 @@ typedef struct s_game
 }	t_game;
 
 void	parse_file(t_game *game, char *filename);
-
 int		is_empty_line(char *line);
 int		is_map_line(char *line);
 int		is_textures_line(char *line);
@@ -143,7 +142,6 @@ char	**resize_map(t_game *game, char **old, int new_size);
 
 char	*skip_spaces(char *str);
 int		close_game(t_game *game);
-int		key_press(int keycode, t_game *game);
 int		rgb_to_int(t_color c);
 
 int		is_valid_map_char(char c);

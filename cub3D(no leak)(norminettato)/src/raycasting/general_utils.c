@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:42:53 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/14 13:38:29 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/14 15:02:33 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,4 @@ int	close_game(t_game *game)
 	printf("Chiusura pulita eseguita\n");
 	exit(0);
 	return (0);
-}
-
-int key_press(int key, t_game *g)
-{
-    g->keys[key] = 1;
-    return (0);
-}
-
-int key_release(int key, t_game *g)
-{
-    g->keys[key] = 0;
-    return (0);
 }

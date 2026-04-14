@@ -6,25 +6,31 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:57:21 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/02 17:42:38 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/14 16:02:13 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	draw_square(t_game *game, t_vector pos, int size, int color)
+
+/* Disegna un rettangolo (o quadrato se w == h) e protegge dai fuori schermo */
+void	draw_rect(t_game *game, t_vector pos, int w, int h, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < size)
+	while (i < h)
 	{
 		j = 0;
-		while (j < size)
+		while (j < w)
 		{
-			my_mlx_pixel_put(&game->ghost_image, (int)pos.x + j,
-				(int)pos.y + i, color);
+			if (pos.x + j >= 0 && pos.x + j < 1920
+				&& pos.y + i >= 0 && pos.y + i < 1080)
+			{
+				my_mlx_pixel_put(&game->ghost_image, (int)pos.x + j,
+					(int)pos.y + i, color);
+			}
 			j++;
 		}
 		i++;
@@ -34,25 +40,28 @@ void	draw_square(t_game *game, t_vector pos, int size, int color)
 void	draw_minimap(t_game *game)
 {
 	int			x;
-	int			y;	
+	int			y;
 	t_vector	pos;
 
-	y = 0;
-	while (y < game->map.height)
+	y = -1;
+	while (game->map.grid[++y])
 	{
-		x = 0;
-		while (game->map.grid[y] && game->map.grid[y][x])
+		x = -1;
+		while (game->map.grid[y][++x])
 		{
-			pos.x = x * MMAP_SCALE + MMAP_OFFSET; // Scala aumentata a 32 per coprire meta' finestra
-			pos.y = y * MMAP_SCALE + MMAP_OFFSET; // +20 per l'offset dal bordo
+			pos.x = x * MMAP_SCALE + MMAP_OFFSET;
+			pos.y = y * MMAP_SCALE + MMAP_OFFSET;
+			
+			// 1. Disegna SEMPRE un blocco nero solido sotto ogni cella
+			draw_rect(game, pos, MMAP_SCALE, MMAP_SCALE, 0x000000);
+			
+			// 2. Disegna i muri e i percorsi leggermente più piccoli
 			if (game->map.grid[y][x] == '1')
-				draw_square(game, pos, MMAP_SCALE - 1, 0xFFFFFF);
+				draw_rect(game, pos, MMAP_SCALE - 1, MMAP_SCALE - 1, 0xFFFFFF);
 			else if (game->map.grid[y][x] == '0'
 				|| ft_strchr("NSEW", game->map.grid[y][x]))
-				draw_square(game, pos, MMAP_SCALE - 1, 0x333333);
-			x++;	
+				draw_rect(game, pos, MMAP_SCALE - 1, MMAP_SCALE - 1, 0x333333);
 		}
-		y++;
 	}
 }
 
@@ -61,14 +70,12 @@ void	draw_player_2d(t_game *game)
 	t_vector	p_pos;
 	int			p_size;
 
-	p_size = 4; // Dimensione del player aumentata in proporzione
-	// 1. Traduzione coordinate MAPPA -> PIXEL
+	p_size = 4;
 	p_pos.x = (game->player.pos.x * MMAP_SCALE) + MMAP_OFFSET;
 	p_pos.y = (game->player.pos.y * MMAP_SCALE) + MMAP_OFFSET;
-	// 2. Centratura del puntino
 	p_pos.x -= (p_size / 2);
 	p_pos.y -= (p_size / 2);
-	draw_square(game, p_pos, p_size, 0xFF0000);
+	draw_rect(game, p_pos, p_size, p_size, 0xFF0000);
 }
 
 void	draw_ray_line_2d(t_game *game, t_ray *ray)
@@ -78,29 +85,24 @@ void	draw_ray_line_2d(t_game *game, t_ray *ray)
 	double		total_pixels;
 	int			i;
 
-	// 1. Calcoliamo la magnitudo del vettore direzione
-	mag = sqrt(ray->ray_dir_x * ray->ray_dir_x + ray->ray_dir_y * ray->ray_dir_y);
-	
-	// 2. Calcoliamo quanti pixel dobbiamo disegnare in totale
-	// (distanza reale = perp_dist * magnitudo)
+	mag = sqrt(ray->ray_dir_x * ray->ray_dir_x
+			+ ray->ray_dir_y * ray->ray_dir_y);
 	total_pixels = ray->perp_wall_dist * MMAP_SCALE * mag;
-
-	// 3. Punto di partenza (Pixel del giocatore)
 	start.x = (game->player.pos.x * MMAP_SCALE) + MMAP_OFFSET;
 	start.y = (game->player.pos.y * MMAP_SCALE) + MMAP_OFFSET;
-
-	i = 0;
-	while (i < (int)total_pixels)
+	i = -1;
+	while (++i < (int)total_pixels)
 	{
-		// Avanziamo lungo la direzione normalizzata (diviso mag) per 1 pixel alla volta
-		my_mlx_pixel_put(&game->ghost_image, 
-			(int)(start.x + (ray->ray_dir_x / mag) * i), 
-			(int)(start.y + (ray->ray_dir_y / mag) * i), 0x00FF00); // Verde
-		i++;
+		if (start.x + (ray->ray_dir_x / mag) * i >= 0
+			&& start.y + (ray->ray_dir_y / mag) * i >= 0)
+		{
+			my_mlx_pixel_put(&game->ghost_image,
+				(int)(start.x + (ray->ray_dir_x / mag) * i),
+				(int)(start.y + (ray->ray_dir_y / mag) * i), 0x00FF00);
+		}
 	}
 }
 
-// Questa funzione prepara i dati e poi chiama la TUA perform_dda
 void	test_ray_2d(t_game *game, int x)
 {
 	t_ray	ray;
@@ -115,8 +117,6 @@ void	test_ray_2d(t_game *game, int x)
 	ray.delta_y = fabs(1 / ray.ray_dir_y);
 	ray.hit = 0;
 	set_step_and_side_dist(game, &ray);
-	// 2. gestione collisioni raggi con muri
 	perform_dda(game, &ray);
-	// 3. DISEGNO (Per vedere il risultato sulla minimappa)
 	draw_ray_line_2d(game, &ray);
 }

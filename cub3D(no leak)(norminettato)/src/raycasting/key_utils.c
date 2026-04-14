@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:55:21 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/14 13:53:12 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/14 15:06:25 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	handle_keypress(int key, t_game *game)
 	else if (key == D)
 		apply_movement(game, -game->player.dir.y, game->player.dir.x);
 	else if (key == LEFT) // Freccia Sinistra (Linux)
-		rotate_player(game, -1);
+		rotate_player(game, -ROT_SPEED);
 	else if (key == RIGHT) // Freccia Destra (Linux)
-		rotate_player(game, 1);
+		rotate_player(game, ROT_SPEED);
 	return (0);
 }
 
