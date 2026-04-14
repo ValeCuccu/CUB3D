@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 13:20:28 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/13 17:23:51 by anpastac         ###   ########.fr       */
+/*   Created: 2026/03/25 12:57:27 by anpastac          #+#    #+#             */
+/*   Updated: 2026/04/14 11:56:49 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,39 +20,33 @@ char	*skip_spaces(char *str)
 	return (str);
 }
 
-void    cleanup_game(t_game *game)
+void	cleanup_game(t_game *game)
 {
-    char *temp_line;
+	char	*temp_line;
 
-    if (!game)
-        return;
-    
-    // 1. Libera la riga corrente se si è interrotto a metà
-    if (game->current_line)
-    {
-        free(game->current_line);
-        game->current_line = NULL;
-    }
-    
-    // 2. Svuota il buffer statico di get_next_line leggendo fino alla fine
-    // e chiude il file descriptor in modo sicuro
-    if (game->fd > 0)
-    {
-        temp_line = get_next_line(game->fd);
-        while (temp_line)
-        {
-            free(temp_line);
-            temp_line = get_next_line(game->fd);
-        }
-        close(game->fd);
-        game->fd = -1;
-    }
-
-    free_textures(game);
-    free_map(game);
+	if (!game)
+		return ;
+	if (game->current_line)
+	{
+		free(game->current_line);
+		game->current_line = NULL;
+	}
+	if (game->fd > 0)
+	{
+		temp_line = get_next_line(game->fd);
+		while (temp_line)
+		{
+			free(temp_line);
+			temp_line = get_next_line(game->fd);
+		}
+		close(game->fd);
+		game->fd = -1;
+	}
+	free_textures(game);
+	free_map(game);
 }
 
-/* Stampa un messaggio di errore, libera la memoria e termina il programma */
+/* Stampa un messaggio di errore, libera memoria e termina il programma */
 void	error_exit(char *msg, t_game *game)
 {
 	cleanup_game(game);

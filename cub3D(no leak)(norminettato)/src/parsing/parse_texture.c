@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 13:15:42 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/14 10:52:49 by anpastac         ###   ########.fr       */
+/*   Created: 2026/03/25 12:57:27 by anpastac          #+#    #+#             */
+/*   Updated: 2026/04/14 11:53:04 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-/*static void	check_file_exists(char *path, t_game *game)
+static void	check_file_exists(char *path, t_game *game)
 {
 	int	fd;
 
@@ -20,28 +20,23 @@
 	if (fd < 0)
 		error_exit("Texture file not found", game);
 	close(fd);
-}*/
+}
 
-static void save_textures(t_game *game, char **texture, char *path)
+static void	save_textures(t_game *game, char **texture, char *path)
 {
-    char    *clean_path;
+	char	*clean_path;
 
-    if (*texture)
-        error_exit("Duplicate texture found", game);
-
-    clean_path = ft_strtrim(skip_spaces(path), " \n\t");
-    if (!clean_path || clean_path[0] == '\0')
-    {
-        if (clean_path)
-            free(clean_path); // Evitiamo leak se era vuota
-        error_exit("Invalid texture path", game);
-    }
-
-    // FIX: Assegniamo SUBITO il puntatore alla struct game!
-    *texture = clean_path; 
-
-    // Ora se questa funzione chiama error_exit, la struct sa cosa liberare.
-    //check_file_exists(clean_path, game);
+	if (*texture)
+		error_exit("Duplicate texture found", game);
+	clean_path = ft_strtrim(skip_spaces(path), " \n\t");
+	if (!clean_path || clean_path[0] == '\0')
+	{
+		if (clean_path)
+			free(clean_path);
+		error_exit("Invalid texture path", game);
+	}
+	*texture = clean_path;
+	check_file_exists(clean_path, game);
 }
 
 void	parse_textures(t_game *game, char *line)

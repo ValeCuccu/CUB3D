@@ -6,7 +6,7 @@
 /*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/14 10:53:25 by anpastac         ###   ########.fr       */
+/*   Updated: 2026/04/14 11:40:54 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	parse_textures(t_game *game, char *line);
 void	parse_color(t_game *game, char *line);
 void	parse_rgb(char *str, t_color *color);
 void	parse_map(t_game *game, char *line);
-char	**resize_map(char **old, int new_size);
+char	**resize_map(t_game *game, char **old, int new_size);
 
 char	*skip_spaces(char *str);
 int		close_game(t_game *game);
