@@ -6,13 +6,13 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:55:21 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/14 15:06:25 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/15 12:48:50 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	handle_keypress(int key, t_game *game)
+/* int	handle_keypress(int key, t_game *game)
 {
 	if (key == ESC)
 		close_game(game);
@@ -28,6 +28,22 @@ int	handle_keypress(int key, t_game *game)
 		rotate_player(game, -ROT_SPEED);
 	else if (key == RIGHT) // Freccia Destra (Linux)
 		rotate_player(game, ROT_SPEED);
+	return (0);
+} */
+
+int	key_press(int key, t_game *game)
+{
+	if (key == ESC)
+		close_game(game);
+	if (key >= 0 && key < 65365)
+		game->keys[key] = 1;
+	return (0);
+}
+
+int	key_release(int key, t_game *game)
+{
+	if (key >= 0 && key < 65365)
+		game->keys[key] = 0;
 	return (0);
 }
 
@@ -62,4 +78,19 @@ void rotate_player(t_game *game, double rot)
     old_plane_x = game->player.plane.x;
     game->player.plane.x = game->player.plane.x * cos(rot) - game->player.plane.y * sin(rot);
     game->player.plane.y = old_plane_x * sin(rot) + game->player.plane.y * cos(rot);
+}
+void	update_player_state(t_game *game)
+{
+	if (game->keys[W])
+		apply_movement(game, game->player.dir.x, game->player.dir.y);
+	if (game->keys[S])
+		apply_movement(game, -game->player.dir.x, -game->player.dir.y);
+	if (game->keys[A])
+		apply_movement(game, game->player.dir.y, -game->player.dir.x);
+	if (game->keys[D])
+		apply_movement(game, -game->player.dir.y, game->player.dir.x);
+	if (game->keys[LEFT])
+		rotate_player(game, -ROT_SPEED);
+	if (game->keys[RIGHT])
+		rotate_player(game, ROT_SPEED);
 }

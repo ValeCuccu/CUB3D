@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:57:21 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/14 16:02:13 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/15 12:31:51 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	draw_rect(t_game *game, t_vector pos, int w, int h, int color)
 		j = 0;
 		while (j < w)
 		{
-			if (pos.x + j >= 0 && pos.x + j < 1920
-				&& pos.y + i >= 0 && pos.y + i < 1080)
+			if (pos.x + j >= 0 && pos.x + j < WIN_WIDTH
+				&& pos.y + i >= 0 && pos.y + i < WIN_HEIGHT)
 			{
 				my_mlx_pixel_put(&game->ghost_image, (int)pos.x + j,
 					(int)pos.y + i, color);

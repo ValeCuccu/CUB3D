@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:29:11 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/09 18:57:55 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/15 12:31:25 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_ray(t_game *game, t_ray *ray, int x)
 	double	camera_x;
 
 	// Calcolo del punto sul piano della telecamera (-1 a 1)
-	camera_x = 2 * x / (double)1920 - 1;
+	camera_x = 2 * x / (double)WIN_WIDTH - 1;
 	// Direzione raggio
 	ray->ray_dir_x = game->player.dir.x + game->player.plane.x * camera_x;
 	ray->ray_dir_y = game->player.dir.y + game->player.plane.y * camera_x;
