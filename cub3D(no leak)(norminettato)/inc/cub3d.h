@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/15 12:58:34 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/15 14:49:35 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # define MOVE_SPEED 0.1
-# define ROT_SPEED 0.01
+# define ROT_SPEED 0.02
 # define TILE_SIZE 64
 # define ESC 65307
 # define W 119
@@ -25,8 +25,8 @@
 # define RIGHT 65363
 # define MMAP_SCALE 10
 # define MMAP_OFFSET 20
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 2560
+# define WIN_HEIGHT 1440
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -167,7 +167,6 @@ void	test_ray_2d(t_game *game, int x);
 void	draw_ray_line_2d(t_game *game, t_ray *ray);
 
 void	apply_movement(t_game *game, double move_x, double move_y);
-//int		handle_keypress(int key, t_game *game);
 void	rotate_player(t_game *game, double rot_dir);
 int		render_frame(t_game *game);
 void	init_ray(t_game *game, t_ray *ray, int x);
@@ -189,5 +188,9 @@ char	*ft_strtrim(const char *s1, const char *set);
 int 	key_press(int key, t_game *g);
 int 	key_release(int key, t_game *g);
 void	update_player_state(t_game *game);
+
+int		get_texture_pixel(t_img *tex, int x, int y);
+t_img	*get_wall_texture(t_game *game, t_ray *ray);
+int		calculate_tex_x(t_game *game, t_ray *ray, t_img *tex);
 
 #endif

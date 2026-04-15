@@ -1,18 +1,17 @@
 /* ************************************************************************** */
-/* */
-/* :::      ::::::::   */
-/* init_engine.c                                      :+:      :+:    :+:   */
-/* +:+ +:+         +:+     */
-/* By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
-/* +#+#+#+#+#+   +#+           */
-/* Created: 2026/03/25 15:59:51 by vacuccu           #+#    #+#             */
-/* Updated: 2026/04/14 13:10:00 by vacuccu          ###   ########.fr       */
-/* */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_engine.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/15 14:40:38 by vacuccu           #+#    #+#             */
+/*   Updated: 2026/04/15 14:41:14 by vacuccu          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-/* QUA INIZIALIZZO LA FINESTRA CON I DATI PER LE DIMENSIONI E PER LE IMG */
 static void	init_mlx_image(t_game *game)
 {
 	game->window = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
@@ -27,7 +26,6 @@ static void	init_mlx_image(t_game *game)
 			&game->ghost_image.endian);
 }
 
-/* QUA SETTO I VALORI DI DEFAULT PER LE COORDINATE DEL PLAYER */
 static void	set_player_vectors(t_game *game)
 {
 	game->player.dir.x = 0;
@@ -74,25 +72,12 @@ static void	load_textures(t_game *game)
 	load_single_texture(game, &game->textures.e_tex, game->textures.east);
 }
 
-/* INIZIALIZZAZIONE VERA E PROPRIA DELLA FINESTRA */
 void	init_engine(t_game *game)
 {
-	// 1. Inizializza la MLX
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		error_exit("MLX init failed", game);
-		
-	// 2. Carica le 4 texture usando la funzione di supporto
-	load_textures(game); 
-	
-	// 3. Crea la finestra e l'immagine usando la funzione di supporto
+	load_textures(game);
 	init_mlx_image(game);
-	
-	// 4. Imposta la direzione in cui guarda il giocatore all'avvio
 	set_player_vectors(game);
-
-	// Eventuali Hooks (se li agganci altrove nel codice, lasciali lì, 
-	// altrimenti scommentali e agganciali qui)
-	// mlx_hook(game->window, 17, 0, close_game, game);
-	// mlx_hook(game->window, 2, 1L<<0, handle_keypress, game);
 }

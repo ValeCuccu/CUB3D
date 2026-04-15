@@ -6,14 +6,12 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:57:21 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/15 12:31:51 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/15 14:41:50 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-
-/* Disegna un rettangolo (o quadrato se w == h) e protegge dai fuori schermo */
 void	draw_rect(t_game *game, t_vector pos, int w, int h, int color)
 {
 	int	i;
@@ -51,11 +49,7 @@ void	draw_minimap(t_game *game)
 		{
 			pos.x = x * MMAP_SCALE + MMAP_OFFSET;
 			pos.y = y * MMAP_SCALE + MMAP_OFFSET;
-			
-			// 1. Disegna SEMPRE un blocco nero solido sotto ogni cella
 			draw_rect(game, pos, MMAP_SCALE, MMAP_SCALE, 0x000000);
-			
-			// 2. Disegna i muri e i percorsi leggermente più piccoli
 			if (game->map.grid[y][x] == '1')
 				draw_rect(game, pos, MMAP_SCALE - 1, MMAP_SCALE - 1, 0xFFFFFF);
 			else if (game->map.grid[y][x] == '0'

@@ -42,7 +42,8 @@ SRC_RAY     = src/raycasting/init_engine.c \
 			  src/raycasting/dda.c \
 			  src/raycasting/key_utils.c \
 			  src/raycasting/minimap_utils.c \
-			  src/raycasting/raycasting.c
+			  src/raycasting/raycasting.c \
+			  src/raycasting/textures_utils.c
 
 
 SRCS        = $(SRC_MAIN) $(SRC_PARSING) $(SRC_RAY)
