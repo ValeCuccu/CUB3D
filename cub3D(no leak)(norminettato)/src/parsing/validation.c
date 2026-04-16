@@ -58,17 +58,23 @@ int	scan_map(t_game *game)
 	return (player_count);
 }
 
-int	check_extension(char *file)
+int check_extension(char *file)
 {
-	int	len;
+    int len;
 
-	len = ft_strlen(file);
-	if (len < 4)
-		return (0);
-	if (file[len - 4] == '.'
-		&& file[len - 3] == 'c'
-		&& file[len - 2] == 'u'
-		&& file[len - 1] == 'b')
-		return (1);
-	return (0);
+    len = ft_strlen(file);
+    if (len <= 4)
+        return (0);
+    if (file[len - 4] == '.'
+        && file[len - 3] == 'c'
+        && file[len - 2] == 'u'
+        && file[len - 1] == 'b')
+    {
+        // Se il carattere prima del .cub è uno slash (es. "dir/.cub")
+        if (file[len - 5] == '/')
+            return (0);
+        return (1);
+    }
+    return (0);
 }
+
