@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/15 14:49:35 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/16 09:23:37 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define RIGHT 65363
 # define MMAP_SCALE 10
 # define MMAP_OFFSET 20
-# define WIN_WIDTH 2560
+# define WIN_WIDTH 1920
 # define WIN_HEIGHT 1440
 
 # include <stdlib.h>

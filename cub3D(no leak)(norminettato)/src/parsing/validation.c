@@ -6,7 +6,7 @@
 /*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:57:27 by anpastac          #+#    #+#             */
-/*   Updated: 2026/04/14 11:58:48 by anpastac         ###   ########.fr       */
+/*   Updated: 2026/04/20 09:00:52 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,21 @@ int	scan_map(t_game *game)
 	return (player_count);
 }
 
-int check_extension(char *file)
+int	check_extension(char *file)
 {
-    int len;
+	int	len;
 
-    len = ft_strlen(file);
-    if (len <= 4)
-        return (0);
-    if (file[len - 4] == '.'
-        && file[len - 3] == 'c'
-        && file[len - 2] == 'u'
-        && file[len - 1] == 'b')
-    {
-        // Se il carattere prima del .cub è uno slash (es. "dir/.cub")
-        if (file[len - 5] == '/')
-            return (0);
-        return (1);
-    }
-    return (0);
+	len = ft_strlen(file);
+	if (len <= 4)
+		return (0);
+	if (file[len - 4] == '.'
+		&& file[len - 3] == 'c'
+		&& file[len - 2] == 'u'
+		&& file[len - 1] == 'b')
+	{
+		if (file[len - 5] == '/')
+			return (0);
+		return (1);
+	}
+	return (0);
 }
-
