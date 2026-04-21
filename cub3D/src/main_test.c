@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:24:06 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/15 12:54:17 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/21 09:54:41 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 	mlx_hook(game.window, 2, 1L << 0, key_press, &game);
 	mlx_hook(game.window, 3, 1L << 1, key_release, &game);
 	mlx_loop_hook(game.mlx, render_frame, &game);
-	printf("Motore avviato. Usa WASD per muoverti e le Frecce per girare.\n");
+	printf("Gioco avviato, usa WASD per muoverti e le Frecce per girare.\n");
 	mlx_loop(game.mlx);
 	return (0);
 }

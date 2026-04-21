@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/16 09:23:37 by anpastac         ###   ########.fr       */
+/*   Updated: 2026/04/21 09:57:28 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define MMAP_SCALE 10
 # define MMAP_OFFSET 20
 # define WIN_WIDTH 1920
-# define WIN_HEIGHT 1440
+# define WIN_HEIGHT 1080
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -125,8 +125,8 @@ typedef struct s_game
 	int			ceiling_set;
 	t_map		map;
 	t_player	player;
-	char        *current_line; // FIX: Per tracciare la riga corrente e liberarla
-    int         fd;            // FIX: Per chiudere il file in caso di errore
+	char		*current_line;
+	int			fd;
 	int			keys[65365];
 }	t_game;
 
@@ -185,8 +185,8 @@ void	free_textures(t_game *game);
 char	*ft_strdup(const char *s);
 char	*ft_strtrim(const char *s1, const char *set);
 
-int 	key_press(int key, t_game *g);
-int 	key_release(int key, t_game *g);
+int		key_press(int key, t_game *g);
+int		key_release(int key, t_game *g);
 void	update_player_state(t_game *game);
 
 int		get_texture_pixel(t_img *tex, int x, int y);
