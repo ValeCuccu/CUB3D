@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 14:40:38 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/15 14:41:14 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/21 11:52:29 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,6 @@ void	init_engine(t_game *game)
 	load_textures(game);
 	init_mlx_image(game);
 	set_player_vectors(game);
+	mlx_mouse_hide(game->mlx, game->window);
+	mlx_hook(game->window, 6, (1L << 6), &handle_mouse_move, game);
 }

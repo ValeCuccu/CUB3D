@@ -6,22 +6,22 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:57:21 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/15 14:41:50 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/21 11:42:19 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	draw_rect(t_game *game, t_vector pos, int w, int h, int color)
+void	draw_square(t_game *game, t_vector pos, int size, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < h)
+	while (i < size)
 	{
 		j = 0;
-		while (j < w)
+		while (j < size)
 		{
 			if (pos.x + j >= 0 && pos.x + j < WIN_WIDTH
 				&& pos.y + i >= 0 && pos.y + i < WIN_HEIGHT)
@@ -49,12 +49,12 @@ void	draw_minimap(t_game *game)
 		{
 			pos.x = x * MMAP_SCALE + MMAP_OFFSET;
 			pos.y = y * MMAP_SCALE + MMAP_OFFSET;
-			draw_rect(game, pos, MMAP_SCALE, MMAP_SCALE, 0x000000);
+			draw_square(game, pos, MMAP_SCALE, 0x000000);
 			if (game->map.grid[y][x] == '1')
-				draw_rect(game, pos, MMAP_SCALE - 1, MMAP_SCALE - 1, 0xFFFFFF);
+				draw_square(game, pos, MMAP_SCALE - 1, 0xFFFFFF);
 			else if (game->map.grid[y][x] == '0'
 				|| ft_strchr("NSEW", game->map.grid[y][x]))
-				draw_rect(game, pos, MMAP_SCALE - 1, MMAP_SCALE - 1, 0x333333);
+				draw_square(game, pos, MMAP_SCALE - 1, 0x333333);
 		}
 	}
 }
@@ -69,7 +69,7 @@ void	draw_player_2d(t_game *game)
 	p_pos.y = (game->player.pos.y * MMAP_SCALE) + MMAP_OFFSET;
 	p_pos.x -= (p_size / 2);
 	p_pos.y -= (p_size / 2);
-	draw_rect(game, p_pos, p_size, p_size, 0xFF0000);
+	draw_square(game, p_pos, p_size, 0xFF0000);
 }
 
 void	draw_ray_line_2d(t_game *game, t_ray *ray)
@@ -97,7 +97,7 @@ void	draw_ray_line_2d(t_game *game, t_ray *ray)
 	}
 }
 
-void	test_ray_2d(t_game *game, int x)
+void	perform_ray(t_game *game, int x)
 {
 	t_ray	ray;
 	double	camera_x;
