@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:21:10 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/21 10:45:18 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/21 09:53:24 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ int	render_frame(t_game *game)
 		draw_3d_projection(game, &ray, x);
 		x++;
 	}
+	draw_minimap(game);
+	draw_player_2d(game);
 	x = 0;
 	while (x < 60)
 	{
-		perform_ray(game, x);
+		test_ray_2d(game, x);
 		x++;
 	}
 	mlx_put_image_to_window(game->mlx, game->window,

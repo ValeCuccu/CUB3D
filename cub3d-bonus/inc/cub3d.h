@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/21 10:48:52 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/21 09:57:28 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,8 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_square(t_game *game, t_vector pos, int size, int color);
 void	draw_minimap(t_game *game);
 void	draw_player_2d(t_game *game);
-void	perform_ray(t_game *game, int x);
+void	test_ray_2d(t_game *game, int x);
+void	draw_ray_line_2d(t_game *game, t_ray *ray);
 
 void	apply_movement(t_game *game, double move_x, double move_y);
 void	rotate_player(t_game *game, double rot_dir);
