@@ -6,7 +6,7 @@
 /*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:57:27 by anpastac          #+#    #+#             */
-/*   Updated: 2026/04/14 11:56:49 by anpastac         ###   ########.fr       */
+/*   Updated: 2026/04/21 13:44:35 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,25 @@ void	free_map(t_game *game)
 	}
 }
 
-void	free_textures(t_game *game)
+void    free_textures(t_game *game)
 {
-	if (game->textures.north)
-		free(game->textures.north);
-	if (game->textures.south)
-		free(game->textures.south);
-	if (game->textures.west)
-		free(game->textures.west);
-	if (game->textures.east)
-		free(game->textures.east);
-	game->textures.north = NULL;
-	game->textures.south = NULL;
-	game->textures.west = NULL;
-	game->textures.east = NULL;
+    if (game->textures.north)
+        free(game->textures.north);
+    if (game->textures.south)
+        free(game->textures.south);
+    if (game->textures.west)
+        free(game->textures.west);
+    if (game->textures.east)
+        free(game->textures.east);
+    if (game->textures.floor)       // AGGIUNTO
+        free(game->textures.floor);   // AGGIUNTO
+    if (game->textures.ceiling)     // AGGIUNTO
+        free(game->textures.ceiling); // AGGIUNTO
+        
+    game->textures.north = NULL;
+    game->textures.south = NULL;
+    game->textures.west = NULL;
+    game->textures.east = NULL;
+    game->textures.floor = NULL;    // AGGIUNTO
+    game->textures.ceiling = NULL;  // AGGIUNTO
 }

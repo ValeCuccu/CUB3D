@@ -1,10 +1,10 @@
-NO ./xpm/north.xpm
-SO ./xpm/south.xpm
-WE ./xpm/west.xpm
-EA ./xpm/east.xpm
+NO ./xpm/30.xpm
+SO ./xpm/31.xpm
+WE ./xpm/16.xpm
+EA ./xpm/14.xpm
 
-F 220,100,0
-C 225,30,0
+F ./xpm/7.xpm
+C ./xpm/4.xpm
 
 111111111111111111111111111111111111111111111
 100000000000000000000000000000000000000000001

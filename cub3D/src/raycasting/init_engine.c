@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/15 14:40:38 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/15 14:41:14 by vacuccu          ###   ########.fr       */
+/*   Created: 2026/04/01 12:55:21 by vacuccu           #+#    #+#             */
+/*   Updated: 2026/04/22 10:05:55 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static void	load_textures(t_game *game)
 	load_single_texture(game, &game->textures.s_tex, game->textures.south);
 	load_single_texture(game, &game->textures.w_tex, game->textures.west);
 	load_single_texture(game, &game->textures.e_tex, game->textures.east);
+	load_single_texture(game, &game->textures.f_tex, game->textures.floor);
+	load_single_texture(game, &game->textures.c_tex, game->textures.ceiling);
 }
 
 void	init_engine(t_game *game)

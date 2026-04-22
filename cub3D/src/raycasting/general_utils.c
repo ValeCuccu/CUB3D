@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:42:53 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/14 15:02:33 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/22 10:04:31 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	close_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->textures.w_tex.img);
 	if (game->textures.e_tex.img)
 		mlx_destroy_image(game->mlx, game->textures.e_tex.img);
+	if (game->textures.f_tex.img)
+		mlx_destroy_image(game->mlx, game->textures.f_tex.img);
+	if (game->textures.c_tex.img)
+		mlx_destroy_image(game->mlx, game->textures.c_tex.img);
 	free_textures(game);
 	free_map(game);
 	if (game->ghost_image.img)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anpastac <anpastac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 12:45:02 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/21 10:48:52 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/22 10:04:06 by anpastac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,19 @@ typedef struct s_img
 
 typedef struct s_textures
 {
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	t_img	n_tex;
-	t_img	s_tex;
-	t_img	w_tex;
-	t_img	e_tex;
-}	t_textures;
+    char    *north;
+    char    *south;
+    char    *west;
+    char    *east;
+    char    *floor;
+    char    *ceiling;
+    t_img   n_tex;
+    t_img   s_tex;
+    t_img   w_tex;
+    t_img   e_tex;
+    t_img   f_tex;   // AGGIUNTA
+    t_img   c_tex;   // AGGIUNTA
+}   t_textures;
 
 typedef struct s_color
 {
@@ -119,8 +123,6 @@ typedef struct s_game
 	void		*window;
 	t_img		ghost_image;
 	t_textures	textures;
-	t_color		floor;
-	t_color		ceiling;
 	int			floor_set;
 	int			ceiling_set;
 	t_map		map;
