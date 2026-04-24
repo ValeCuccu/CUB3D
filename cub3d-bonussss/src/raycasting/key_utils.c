@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:55:21 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/23 10:48:55 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/24 16:24:40 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	key_press(int key, t_game *game)
 		close_game(game);
 	if (key >= 0 && key < 65365)
 		game->keys[key] = 1;
+	if (key == TAB)
+		game->mouse_lock = !game->mouse_lock;
 	return (0);
 }
 

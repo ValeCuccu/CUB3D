@@ -1,29 +1,24 @@
-# --- NOME DEL PROGRAMMA ---
-NAME        = cub3D
+NAME        = cub3D_bonus
 
-# --- COLORI (Solo Verde e Rosso) ---
 GREEN       = \033[0;32m
 RED         = \033[0;31m
 RESET       = \033[0m
 
-# --- COMPILATORE E FLAG ---
 CC          = cc
-# Nota: aggiunto -I./inc per dire al compilatore dove trovare i file .h
 CFLAGS      = -Wall -Wextra -Werror -I./inc
 
-# --- PATHS AGGIORNATI ---
-# Le librerie ora sono dentro inc/
 LIBFT_DIR   = inc/libft/
 MLX_DIR     = inc/minilibx-linux/
 
-# Aggiornati i flag di linking per puntare alle nuove directory
 LDFLAGS     = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
-# --- SORGENTI AGGIORNATI (Aggiunto il prefisso src/) ---
-# Il main ora è in src/
-SRC_MAIN    = src/main.c
+# ==========================================
+# FILE SORGENTE (Tutti inclusi)
+# ==========================================
+# NOTA: Assicurati che src/main_test.c sia il file corretto. 
+# Se l'hai rinominato in main.c, cambialo qui sotto.
+SRC_MAIN    = src/main_test.c
 
-# Parte di Antonio (Parsing)
 SRC_PARSING = src/parsing/line_checks.c \
               src/parsing/parse_color.c \
               src/parsing/parse_file.c \
@@ -31,32 +26,32 @@ SRC_PARSING = src/parsing/line_checks.c \
               src/parsing/parse_texture.c \
               src/parsing/utils.c \
               src/parsing/validation.c \
-			  src/parsing/validation2.c
+              src/parsing/validation2.c
 
-SRC_MAIN	= src/main_test.c
-
-# Parte Tua (Raycasting)
 SRC_RAY     = src/raycasting/init_engine.c \
-			  src/raycasting/render.c \
-			  src/raycasting/general_utils.c \
-			  src/raycasting/dda.c \
-			  src/raycasting/key_utils.c \
-			  src/raycasting/minimap_utils.c \
-			  src/raycasting/raycasting.c \
-			  src/raycasting/textures_utils.c \
-			  src/raycasting/mouse_env.c
-
+              src/raycasting/render.c \
+              src/raycasting/general_utils.c \
+              src/raycasting/dda.c \
+              src/raycasting/key_utils.c \
+              src/raycasting/minimap_utils.c \
+              src/raycasting/raycasting.c \
+              src/raycasting/textures_utils.c \
+              src/raycasting/mouse_env.c
 
 SRCS        = $(SRC_MAIN) $(SRC_PARSING) $(SRC_RAY)
 OBJS        = $(SRCS:.c=.o)
 
-# --- REGOLE (Nessuna modifica strutturale necessaria qui) ---
+# ==========================================
+# REGOLE
+# ==========================================
+all: $(NAME)
 
+# Compila tutti i file in un eseguibile chiamato cub3D
 $(NAME): $(OBJS)
 	@make -C $(LIBFT_DIR) > /dev/null
 	@make -C $(MLX_DIR) > /dev/null
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
-	@echo "$(GREEN)✅ cub3D creato con successo!$(RESET)"
+	@echo "$(GREEN)✅ cub3D_bonus compilato con successo!$(RESET)"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@ || (echo "$(RED)❌ Errore nella compilazione di $<$(RESET)" && exit 1)
@@ -68,14 +63,17 @@ clean:
 
 fclean: clean
 	@make fclean -C $(LIBFT_DIR) > /dev/null
-	@rm -f $(NAME)
-	@echo "$(GREEN)🗑️  Eseguibile cub3D rimosso.$(RESET)"
+	@rm -f $(NAME) $(NAME_BONUS)
+	@echo "$(GREEN)🗑️  Eseguibili rimossi.$(RESET)"
 
 re: fclean all
 
-all: $(NAME)
+bonus: $(NAME)
 
-bonus: all
-	@echo "$(GREEN)✅ Bonus compilati (se presenti).$(RESET)"
+$(NAME_BONUS): $(OBJS)
+	@make -C $(LIBFT_DIR) > /dev/null
+	@make -C $(MLX_DIR) > /dev/null
+	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME_BONUS)
+	@echo "$(GREEN)🌟 cub3D_bonus compilato con successo!$(RESET)"
 
 .PHONY: all clean fclean re bonus

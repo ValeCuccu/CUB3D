@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:58:33 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/23 11:59:43 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/24 16:23:51 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define MMAP_OFFSET 20
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
+# define TAB 65289
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -129,6 +130,7 @@ typedef struct s_game
 	char		*current_line;
 	int			fd;
 	int			keys[65365];
+	int			mouse_lock;
 }	t_game;
 
 void	parse_file(t_game *game, char *filename);

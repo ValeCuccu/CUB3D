@@ -6,7 +6,7 @@
 /*   By: vacuccu <vacuccu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:24:06 by vacuccu           #+#    #+#             */
-/*   Updated: 2026/04/23 10:48:29 by vacuccu          ###   ########.fr       */
+/*   Updated: 2026/04/24 16:32:10 by vacuccu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_bzero(&game, sizeof(t_game));
+	game.mouse_lock = 1;
 	parse_file(&game, argv[1]);
 	init_engine(&game);
 	mlx_hook(game.window, 17, 0, close_game, &game);

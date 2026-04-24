@@ -73,7 +73,4 @@ re: fclean all
 
 all: $(NAME)
 
-bonus: all
-	@echo "$(GREEN)✅ Bonus compilati (se presenti).$(RESET)"
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
